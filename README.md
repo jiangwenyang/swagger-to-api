@@ -60,6 +60,28 @@
 
   选择对应的API并生成API到对应的文件（需要保证文件存在）
 
+## 模板变量
+
+模板中会自动注入API参数，可以直接使用
+
+```ts
+interface API {
+  path: string; // 路径
+  method: string; // 请求方法
+  tags: string[]; // 分类
+  summary: string; // 标题
+  operationId: string; // id
+  parameters: Record<string, any>[]; // 请求参数，JSON对象
+  swagger: string; // swagger版本
+  info: {
+    version:string; // API版本
+    title:string; // API名称
+  };
+  host: string; // host
+  basePath: string; // 基础路径
+}
+```
+
 
 ## TODO
 
