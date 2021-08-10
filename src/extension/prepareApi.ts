@@ -5,8 +5,8 @@ import { Docs, PathMethod, PathInfo } from '../core/types';
 import { getPathsGroupByTag } from '../core/utils';
 
 // 选择并获取文档
-const prepareDocs = async () => {
-  const { services } = (await getConfig()) || {};
+const prepareDocs = async (rootPath?: string) => {
+  const { services } = (await getConfig(rootPath)) || {};
 
   if (!(services && services.length)) {
     vscode.window.showErrorMessage('请先配置服务地址！');
@@ -92,8 +92,14 @@ const selectAPI = async (docs: Docs) => {
   })) as PathInfo[];
 };
 
-export default async function prepareAPI() {
-  const docs = await prepareDocs();
+/**
+ * API生成获取选择
+ * @export
+ * @param {string} [rootPath]
+ * @returns
+ */
+export default async function prepareAPI(rootPath?: string) {
+  const docs = await prepareDocs(rootPath);
 
   if (!docs) {
     vscode.window.showErrorMessage('获取接口文档失败，请检查配置！');

@@ -4,7 +4,7 @@
   "publisher": "jiangwenyang",
   "icon": "images/logo.png",
   "description": "从swagger快速生成API文件",
-  "version": "0.0.31",
+  "version": "0.0.33",
   "engines": {
     "vscode": "^1.58.0"
   },
@@ -57,7 +57,8 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
+    "copy": "gulp",
+    "vscode:prepublish": "yarn run copy && yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile && yarn run lint",
@@ -75,6 +76,7 @@
     "@typescript-eslint/parser": "^4.26.0",
     "eslint": "^7.27.0",
     "glob": "^7.1.7",
+    "gulp": "^4.0.2",
     "mocha": "^8.4.0",
     "typescript": "^4.3.2",
     "vscode-test": "^1.5.2"

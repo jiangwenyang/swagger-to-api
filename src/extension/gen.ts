@@ -16,6 +16,12 @@ type Result = {
   result: any;
 };
 
+/**
+ * 执行hygen生成
+ * @param {PathInfo} api API信息
+ * @param {string} rootPath 根目录
+ * @returns
+ */
 const hygen = (api: PathInfo, rootPath: string) => {
   const argv = Object.entries(api).flatMap(([key, value]) => {
     try {
@@ -38,10 +44,18 @@ const hygen = (api: PathInfo, rootPath: string) => {
   });
 };
 
+/**
+ * 显示API生成结果
+ * @param {Result[]} successList 成功列表
+ * @param {Result[]} failureList 失败列表
+ */
 const showResult = (successList: Result[], failureList: Result[]) => {
   const outputChanel = vscode.window.createOutputChannel('swagger-to-api');
 
-  successList.length && outputChanel.appendLine('--------生成成功API--------');
+  successList.length &&
+    outputChanel.appendLine(
+      '--------生成成功API（注：跳过也视为生成成功）--------'
+    );
   successList.forEach(({ api }) =>
     outputChanel.appendLine(formatGenResult(api))
   );
@@ -55,11 +69,16 @@ const showResult = (successList: Result[], failureList: Result[]) => {
     vscode.window.showInformationMessage('生成API成功！');
   } else {
     vscode.window.showErrorMessage('API生成失败，请检查模板配置！');
-    outputChanel.show();
   }
+  outputChanel.show();
   outputChanel.dispose();
 };
 
+/**
+ * 生成API
+ * @export
+ * @returns
+ */
 export default async function gen() {
   const rootPath = await getRootPath();
 
@@ -74,7 +93,7 @@ export default async function gen() {
     return;
   }
 
-  const apis = await prepareApi();
+  const apis = await prepareApi(rootPath);
 
   if (!(apis && apis.length)) {
     return;

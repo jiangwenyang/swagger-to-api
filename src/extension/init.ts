@@ -1,7 +1,12 @@
 import * as vscode from 'vscode';
 import { getRootPath, isTemplatesExits, copyTemplates } from './helpers';
 
-export default async () => {
+/**
+ * 初始化生成项目模板
+ * @export
+ * @returns
+ */
+export default async function init() {
   const rootPath = await getRootPath();
   if (!rootPath) {
     return;
@@ -24,4 +29,4 @@ export default async () => {
   } catch (error) {
     console.log(error);
   }
-};
+}

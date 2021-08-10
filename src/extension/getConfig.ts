@@ -9,8 +9,10 @@ import { Config } from './types';
  * @export
  * @returns
  */
-export default async function getConfig(): Promise<Config | undefined> {
-  const rootPath = await getRootPath();
+export default async function getConfig(
+  rootPath?: string
+): Promise<Config | undefined> {
+  rootPath = rootPath || (await getRootPath());
   if (!rootPath) {
     return;
   }
