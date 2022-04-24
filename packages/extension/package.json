@@ -1,0 +1,65 @@
+{
+  "name": "swg-extension",
+  "displayName": "swg",
+  "publisher": "jiangwenyang",
+  "description": "从swagger快速生成API文件",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.66.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "swagger",
+    "api",
+    "gen"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiangwenyang/swg/issues",
+    "email": "formulahendry@gmail.com"
+  },
+  "homepage": "https://github.com/jiangwenyang/swg/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiangwenyang/swg"
+  },
+  "activationEvents": [
+    "onCommand:swg.init"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "swg.init",
+        "title": "init",
+        "category": "swg"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "swg",
+        "properties": {
+          "swg.services": {
+            "type": "array",
+            "default": []
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "yarn esbuild-base -- --sourcemap",
+    "esbuild-watch": "yarn esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.66.0"
+  },
+  "dependencies": {
+    "cosmiconfig": "^7.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "swg-core",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "esbuild": "^0.14.36",
+    "execa": "^6.1.0",
+    "fs-extra": "^10.0.1",
+    "hygen": "^6.2.0",
+    "node-fetch": "2"
+  },
+  "scripts": {
+    "lint": "eslint --ext .ts src",
+    "compile": "tsc -p .",
+    "watch": "tsc --watch -p ."
+  }
+}
